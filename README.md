@@ -1,67 +1,40 @@
-# Hybrid Voice and Vision Automation System 🎙️👁️💡
+Hybrid Voice and Vision Automation System
 
-Hybrid Voice and Vision Automation System is an intelligent, edge-computing IoT application built for the Raspberry Pi 4. It features:
+Hello and welcome to my automation project. I built this system to bridge the gap between physical hardware and smart software. Instead of using a regular switch, this project turns a Raspberry Pi 4 into an intelligent room controller that reacts to ambient light and human voice commands. I developed this during my Embedded Systems internship at Ignite Innovation Techno Solutions.
 
-* **Hardware/OS:** Raspberry Pi 4 / Raspberry Pi OS
-* **Computer Vision Integration:** OpenCV (for automated ambient light sensing)
-* **Speech Recognition:** Google Speech-to-Text API (for background voice control)
-* **Hardware Actuation:** GPIO Zero (for LED / 5V Relay control)
+What it Does
 
-Developed during an Embedded Systems internship at Ignite Innovation Techno Solutions (IITS).
+Auto Mode. It uses your webcam as a light sensor. If you turn off the room lights, it instantly turns on your LED.
+Manual Mode. When you speak a command like Turn on, it stops listening to the camera and obeys your voice.
 
----
+What You Need to Build This
 
-### 1. Prerequisites
-Ensure you have the following hardware and software ready before starting:
-* Raspberry Pi 4 (with internet connection)
-* USB Webcam (with built-in microphone)
-* LED (or 5V Relay Module for appliances) + 220Ω / 330Ω Resistor
-* Breadboard & Jumper Wires
-* Python 3 installed on the Raspberry Pi
+A Raspberry Pi 4 connected to the internet.
 
-### 2. Clone The Repository
-Open your Raspberry Pi terminal and run:
-```bash
-git clone [https://github.com/YourUsername/Hybrid-Voice-Vision-Automation-Pi.git](https://github.com/YourUsername/Hybrid-Voice-Vision-Automation-Pi.git)
-cd Hybrid-Voice-Vision-Automation-Pi
-(Note: Replace YourUsername with your actual GitHub username).
+A USB Webcam with a microphone.
 
-3. Install Dependencies
-Install the required system-level audio and vision libraries:
+An LED.
 
-Bash
-sudo apt update
-sudo apt install python3-pyaudio flac python3-opencv
-Install the required Python packages:
+A 220 ohm or 330 ohm resistor.
 
-Bash
-pip3 install SpeechRecognition gpiozero opencv-python numpy
-4. Hardware Setup
-Wire the hardware components before running the scripts:
+A breadboard and jumper wires.
 
-LED Anode (+): Connect to BCM GPIO 17 (Physical Pin 11)
+Step by Step Setup Guide
 
-LED Cathode (-): Connect to resistor, then to GND (Physical Pin 6)
+Step 1. Wire it up.
+Connect the longer leg of your LED to GPIO 17, which is Physical Pin 11. Connect the shorter leg of your LED to your resistor, and plug the other end of the resistor into a Ground pin, like Physical Pin 6. Plug your USB Webcam into the Pi.
 
-Webcam: Plug into any available USB port.
+Step 2. Grab the Code.
+Open your Raspberry Pi terminal and clone this repository to your machine using your git clone link, then navigate into the downloaded folder.
 
-5. Run The System
-Open the terminal inside your project folder and run the main hybrid controller:
+Step 3. Install the software.
+Update your system and install the audio and vision tools by typing sudo apt update, and then type sudo apt install python3-pyaudio flac python3-opencv. Next, install the Python libraries by typing pip3 install SpeechRecognition gpiozero opencv-python numpy.
 
-Bash
-python3 hybrid_controller.py
-Note: Please remain quiet for the first 2 seconds while the system calibrates the microphone to your room's ambient noise.
+Step 4. Run the project.
+Run the main script by typing python3 hybrid_controller.py. When you hit enter, stay quiet for two seconds so the microphone can calibrate to the background noise in your room.
 
-6. Usage & Modes
-Auto Mode (Default): The system uses OpenCV to read the room's brightness. Cover the webcam lens with your hand to simulate darkness and watch the LED turn ON automatically.
+How to Talk to It
 
-Manual Override: Speak a voice command. The system will instantly lock into a manual state, ignoring the camera feed until you reset it.
-
-7. Voice Commands Used
-Speak these commands clearly into the webcam microphone:
-
-"Turn on" -> Overrides camera and forces the GPIO ON.
-
-"Turn off" -> Overrides camera and forces the GPIO OFF.
-
-"Auto" -> Returns control to the ambient light sensor.
+Command 1. Say Turn on to override the camera and force the light on.
+Command 2. Say Turn off to override the camera and force the light off.
+Command 3. Say Auto to give control back to the camera light sensor.
